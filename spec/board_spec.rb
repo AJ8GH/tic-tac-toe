@@ -23,6 +23,16 @@ module TicTacToe
           expect(board.grid).to eq 'grid'
         end
       end
+
+      context '#get_cell' do
+        it 'returns the cell based on the (x, y) coordinate' do
+          grid = [['', '', '' ],
+                  ['', '', 'X'],
+                  ['', '', '' ]]
+          board = Board.new(grid: grid)
+          expect(board.get_cell(2, 1)).to eq 'X'
+        end
+      end
     end
   end
 end
