@@ -16,6 +16,13 @@ module TicTacToe
           expect(@board.grid[0].length).to eq 3
         end
       end
+
+      context '#grid' do
+        it 'returns the value of the grid' do
+          board = Board.new(grid: 'grid')
+          expect(board.grid).to eq 'grid'
+        end
+      end
     end
   end
 end
