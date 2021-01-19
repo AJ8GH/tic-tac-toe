@@ -28,4 +28,25 @@ describe Array do
       expect([].all_same?).to be true
     end
   end
+
+  context '#any_empty?' do
+    it 'returns true for all empty array' do
+      expect(['', [], {}].any_empty?).to be true
+    end
+
+    it 'returns false if no element is empty' do
+      expect(['X', Object.new, 7].any_empty?).to be false
+    end
+
+    it 'returns true if one element is empty' do
+      expect(['X', '', 99].any_empty?).to be true
+    end
+  end
+
+  context '#none_empty?' do
+    it 'returns true for an array with no empties' do
+      expect(['O', 'Cat', 'Dog'].none_empty?).to be true
+    end
+  end
+
 end
