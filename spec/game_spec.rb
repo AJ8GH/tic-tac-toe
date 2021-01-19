@@ -70,11 +70,5 @@ module TicTacToe
         expect(game.game_over_message).to eq "The game ended in a tie"
       end
     end
-
-    context '#play' do
-      it '' do
-
-      end
-    end
   end
 end

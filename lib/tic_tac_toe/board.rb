@@ -24,8 +24,9 @@ module TicTacToe
 
     def winner?
       winning_positions.each do |winning_position|
-        next if winning_position_values(winning_position).all_empty?
-        return true if winning_position_values(winning_position).all_same?
+        unless winning_position_values(winning_position).any_empty?
+          return true if winning_position_values(winning_position).all_same?
+        end
       end
       false
     end
@@ -35,11 +36,19 @@ module TicTacToe
     end
 
     def formatted_grid
-      puts [" #{get_cell(0, 0).value} | #{get_cell(1, 0).value} | #{get_cell(2, 0).value} \n",
-            "___|___|___\n",
-            " #{get_cell(0, 1).value} | #{get_cell(1, 1).value} | #{get_cell(2, 1).value} \n",
-            "___|___|___\n",
-            " #{get_cell(0, 2).value} | #{get_cell(1, 2).value} | #{get_cell(2, 2).value} "].join
+      output_grid = grid.each do |row|
+        row.map { |cell| cell.value = ' ' if cell.value.empty? }
+      end
+
+      puts [
+        "     |     |     \n",
+        "  #{get_cell(0, 0).value}  |  #{get_cell(1, 0).value}  |  #{get_cell(2, 0).value}  \n",
+        "_____|_____|_____\n     |     |     \n",
+        "  #{get_cell(0, 1).value}  |  #{get_cell(1, 1).value}  |  #{get_cell(2, 1).value}  \n",
+        "_____|_____|_____\n     |     |     \n",
+        "  #{get_cell(0, 2).value}  |  #{get_cell(1, 2).value}  |  #{get_cell(2, 2).value}  \n",
+        "     |     |     \n\n"
+      ].join
     end
 
     private

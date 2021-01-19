@@ -16,7 +16,11 @@ module TicTacToe
     end
 
     def move_number_layout
-      " 1 | 2 | 3 \n___|___|___\n 4 | 5 | 6 \n___|___|___\n 7 | 8 | 9 "
+      [
+      "     |     |     \n  1  |  2  |  3  \n_____|_____|_____\n",
+      "     |     |     \n  4  |  5  |  6  \n_____|_____|_____\n",
+      "     |     |     \n  7  |  8  |  9  \n     |     |     "
+    ].join
     end
 
     def get_move(human_move = gets.chomp)
@@ -32,14 +36,20 @@ module TicTacToe
       puts "#{current_player.name} to play first"
       while true
         board.formatted_grid
-        puts ''
         puts request_move
         puts move_number_layout
         x, y = get_move
         board.set_cell(x, y, current_player.character)
-        if game_over
+        if board.game_over
           puts game_over_message
-          board.formatted_grid
+          board.formatted_grid;
+          puts 'Would you like to play again? y/n'
+          answer = gets.chomp
+          if answer == 'y'
+            play
+          elsif answer == 'n'
+            puts 'Bye!'; break
+          end
         else
           switch_players
         end
