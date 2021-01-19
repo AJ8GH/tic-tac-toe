@@ -53,6 +53,21 @@ module TicTacToe
 
       context '#game_over' do
         before(:all) { @board = Board.new }
+        let(:row_win) { [ [o,o,o],
+                          [x,o,x],
+                          [x,x,o] ] }
+        let(:column_win) { [ [x,o,x],
+                             [x,x,o],
+                             [x,o,o] ] }
+        let(:diagonal_win) { [ [o,x,x],
+                               [x,o,o],
+                               [x,x,o] ] }
+        let(:draw) { [ [x,o,o],
+                       [o,x,x],
+                       [x,o,o] ] }
+        let(:unfinished) { [ [x, e, e],
+                             [e, o, o],
+                             [e, e, e] ] }
 
         it 'returns :winner if winner? is true' do
           allow(@board).to receive(:winner?).and_return(true)
@@ -70,10 +85,13 @@ module TicTacToe
           allow(@board).to receive(:draw?).and_return(false)
           expect(@board.game_over).to be false
         end
+
+        it 'returns winner when row has objects that all all the same value' do
+          expect(Board.new(grid: row_win).game_over).to eq :winner
+        end
       end
 
       context '#draw?' do
-
         it 'returns true if no cells are empty' do
           grid = Array.new(3) {Array.new(3) { CellStruct.new(rand) } }
           board = Board.new(grid: grid)
