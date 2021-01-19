@@ -93,6 +93,10 @@ module TicTacToe
         it 'returns winner when column has objects of all same value' do
           expect(Board.new(gird: column_win).game_over).to eq :winner
         end
+
+        it 'returns winner when diagonal has objects of all same value' do
+          expect(Board.new(grid: diagonal_win).game_over).to eq :winner
+        end
       end
 
       context '#draw?' do
