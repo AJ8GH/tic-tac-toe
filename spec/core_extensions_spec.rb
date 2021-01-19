@@ -19,5 +19,9 @@ describe Array do
     it 'returns true for an array of 3 Xs' do
       expect(['X', 'X', 'X'].all_same?).to be true
     end
+
+    it 'returns false for a mixed array' do
+      expect(['X', 'X', ''].all_same?).to be false
+    end
   end
 end
