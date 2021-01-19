@@ -45,6 +45,27 @@ module TicTacToe
           expect(board.get_cell(0, 0).value).to eq 'O'
         end
       end
+
+      context '#game_over' do
+        before(:all) { @board = Board.new }
+
+        it 'returns :winner if winner? is true' do
+          allow(@board).to receive(:winner?).and_return(true)
+          expect(@board.game_over).to eq :winner
+        end
+
+        it 'returns :draw if winner? is false and draw? is true' do
+          allow(@board).to receive(:winner?).and_return(false)
+          allow(@board).to receive(:draw?).and_return(true)
+          expect(@board.game_over).to eq :draw
+        end
+
+        it 'returns false if winner? is false and draw? is false' do
+          allow(@board).to receive(:winner?).and_return(false)
+          allow(@board).to receive(:draw?).and_return(false)
+          expect(@board.game_over).to be false
+        end
+      end
     end
   end
 end

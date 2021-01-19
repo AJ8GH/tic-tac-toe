@@ -14,6 +14,16 @@ module TicTacToe
       get_cell(x, y).value = value
     end
 
+    def game_over
+      winner? ? :winner : draw? ? :draw : false
+    end
+
+    def winner?
+    end
+
+    def draw?
+    end
+
     private
 
     def default_grid
