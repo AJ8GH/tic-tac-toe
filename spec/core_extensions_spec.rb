@@ -9,5 +9,9 @@ describe Array do
     it 'returns false if some of the array elements are not empty' do
       expect([2, '', Object.new].all_empty?).to be false
     end
+
+    it 'returns true for an empty array' do
+      expect([].all_empty?).to be true
+    end
   end
 end
