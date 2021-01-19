@@ -47,6 +47,14 @@ describe Array do
     it 'returns true for an array with no empties' do
       expect(['O', 'Cat', 'Dog'].none_empty?).to be true
     end
+
+    it 'returns false for all empty array' do
+      expect(['', '', ''].none_empty?).to be false
+    end
+
+    it 'returns false for one empty element' do
+      expect(['X', 'O', ''].none_empty?).to be false
+    end
   end
 
 end
