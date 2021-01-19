@@ -86,8 +86,12 @@ module TicTacToe
           expect(@board.game_over).to be false
         end
 
-        it 'returns winner when row has objects that all all the same value' do
+        it 'returns winner when row has objects that are all the same value' do
           expect(Board.new(grid: row_win).game_over).to eq :winner
+        end
+
+        it 'returns winner when column has objects of all same value' do
+          expect(Board.new(gird: column_win).game_over).to eq :winner
         end
       end
 
