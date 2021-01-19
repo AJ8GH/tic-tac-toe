@@ -53,21 +53,26 @@ module TicTacToe
 
       context '#game_over' do
         before(:all) { @board = Board.new }
-        let(:row_win) { [ [o,o,o],
-                          [x,o,x],
-                          [x,x,o] ] }
-        let(:column_win) { [ [x,o,x],
-                             [x,x,o],
-                             [x,o,o] ] }
-        let(:diagonal_win) { [ [o,x,x],
-                               [x,o,o],
-                               [x,x,o] ] }
-        let(:draw) { [ [x,o,o],
-                       [o,x,x],
-                       [x,o,o] ] }
-        let(:unfinished) { [ [x, e, e],
-                             [e, o, o],
-                             [e, e, e] ] }
+
+        let(:row_win)      { [ [o, o, o],
+                               [x, o, x],
+                               [x, x, o] ] }
+
+        let(:column_win)   { [ [x, o, e],
+                               [x, x, e],
+                               [x, o, o] ] }
+
+        let(:diagonal_win) { [ [o, x, x],
+                               [x, o, o],
+                               [x, x, o] ] }
+
+        let(:draw)         { [ [x, o, o],
+                               [o, x, x],
+                               [x, o, o] ] }
+
+        let(:unfinished)   { [ [x, e, e],
+                               [e, o, o],
+                               [e, e, e] ] }
 
         it 'returns :winner if winner? is true' do
           allow(@board).to receive(:winner?).and_return(true)
@@ -91,7 +96,7 @@ module TicTacToe
         end
 
         it 'returns winner when column has objects of all same value' do
-          expect(Board.new(gird: column_win).game_over).to eq :winner
+          expect(Board.new(grid: column_win).game_over).to eq :winner
         end
 
         it 'returns winner when diagonal has objects of all same value' do
@@ -100,6 +105,10 @@ module TicTacToe
 
         it 'returns draw when all board space is taken with no 3 in a row' do
           expect(Board.new(grid: draw).game_over).to eq :draw
+        end
+
+        it 'returns false when there are still empty cells on the board' do
+          expect(Board.new(grid: unfinished).game_over).to be false
         end
       end
 
