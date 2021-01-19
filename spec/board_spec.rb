@@ -33,6 +33,18 @@ module TicTacToe
           expect(board.get_cell(2, 1)).to eq 'X'
         end
       end
+
+      context '#set cell' do
+        it 'updates the value of the cell object at (x, y) coordinate' do
+          CellStruct = Struct.new(:value) # create a struct object so that board_spec.rb does not rely on Cell class
+          grid = [[CellStruct.new('X'), '', ''],
+                                 [ '',  '', ''],
+                                 [ '',  '', '']]
+          board = Board.new(grid: grid)
+          board.set_cell(0, 0, 'O')
+          expect(board.get_cell(0, 0).value).to eq 'O'
+        end
+      end
     end
   end
 end
