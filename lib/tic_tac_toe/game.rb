@@ -15,13 +15,35 @@ module TicTacToe
       "#{current_player.name}: Enter a number between 1 and 9 to make your move"
     end
 
+    def move_number_layout
+      " 1 | 2 | 3 \n___|___|___\n 4 | 5 | 6 \n___|___|___\n 7 | 8 | 9 "
+    end
+
     def get_move(human_move = gets.chomp)
       human_move_to_coordinate(human_move)
     end
 
     def game_over_message
       return "#{current_player.name} won!" if board.game_over == :winner
-      return "The game ended in a tie" if board.game_over == :draw  
+      return "The game ended in a tie" if board.game_over == :draw
+    end
+
+    def play
+      puts "#{current_player.name} to play first"
+      while true
+        board.formatted_grid
+        puts ''
+        puts request_move
+        puts move_number_layout
+        x, y = get_move
+        board.set_cell(x, y, current_player.character)
+        if game_over
+          puts game_over_message
+          board.formatted_grid
+        else
+          switch_players
+        end
+      end
     end
 
     private

@@ -73,7 +73,7 @@ module TicTacToe
 
     context '#play' do
       it '' do
-        
+
       end
     end
   end
