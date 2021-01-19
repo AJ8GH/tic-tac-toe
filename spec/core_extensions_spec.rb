@@ -23,5 +23,9 @@ describe Array do
     it 'returns false for a mixed array' do
       expect(['X', 'X', ''].all_same?).to be false
     end
+
+    it 'returns true for an empty array' do
+      expect([].all_same?).to be true
+    end
   end
 end
