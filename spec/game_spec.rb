@@ -18,5 +18,14 @@ module TicTacToe
         expect(game.other_player).to eq isaac
       end
     end
+
+    context '#switch_players' do
+      it 'switches @current_player and @other_player' do
+        game = Game.new([adam, isaac])
+        current_player = game.current_player
+        game.switch_players
+        expect(game.other_player).to eq current_player
+      end
+    end
   end
 end
