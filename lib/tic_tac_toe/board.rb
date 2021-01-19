@@ -22,6 +22,7 @@ module TicTacToe
     end
 
     def draw?
+      grid.flatten.map(&:value).none_empty?
     end
 
     private

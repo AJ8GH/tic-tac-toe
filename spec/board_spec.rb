@@ -1,5 +1,11 @@
 module TicTacToe
   describe Board do
+    # create a struct object so that board_spec.rb does not rely on Cell class
+    before(:all) { CellStruct = Struct.new(:value) }
+    let(:o) { CellStruct.new('O') }
+    let(:x) { CellStruct.new('X') }
+    let(:e) { CellStruct.new('') }
+
     context '#initialize' do
       it 'can be initialized with a hash' do
         expect { Board.new({grid: 'grid'}) }.not_to raise_error
@@ -26,20 +32,19 @@ module TicTacToe
 
       context '#get_cell' do
         it 'returns the cell based on the (x, y) coordinate' do
-          grid = [['', '', '' ],
-                  ['', '', 'X'],
-                  ['', '', '' ]]
+          grid = [[e, e, e],
+                  [e, e, x],
+                  [e, e, e]]
           board = Board.new(grid: grid)
-          expect(board.get_cell(2, 1)).to eq 'X'
+          expect(board.get_cell(2, 1).value).to eq 'X'
         end
       end
 
       context '#set cell' do
         it 'updates the value of the cell object at (x, y) coordinate' do
-          CellStruct = Struct.new(:value) # create a struct object so that board_spec.rb does not rely on Cell class
-          grid = [[CellStruct.new('X'), '', ''],
-                                 [ '',  '', ''],
-                                 [ '',  '', '']]
+          grid = [[x, e, e],
+                 [ e, e, e],
+                 [ e, e, e]]
           board = Board.new(grid: grid)
           board.set_cell(0, 0, 'O')
           expect(board.get_cell(0, 0).value).to eq 'O'
@@ -64,6 +69,27 @@ module TicTacToe
           allow(@board).to receive(:winner?).and_return(false)
           allow(@board).to receive(:draw?).and_return(false)
           expect(@board.game_over).to be false
+        end
+      end
+
+      context '#draw?' do
+
+        it 'returns true if no cells are empty' do
+          grid = Array.new(3) {Array.new(3) { CellStruct.new(rand) } }
+          board = Board.new(grid: grid)
+          expect(board.draw?).to be true
+        end
+
+        it 'returns false if board is empty' do
+          expect(Board.new.draw?).to be false
+        end
+
+        it 'returns false if one cell is empty' do
+          grid = [[x, o, x],
+                  [o, o, x],
+                  [o, x, e]]
+          board = Board.new(grid: grid)
+          expect(board.draw?).to be false
         end
       end
     end
