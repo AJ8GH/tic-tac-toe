@@ -14,4 +14,10 @@ describe Array do
       expect([].all_empty?).to be true
     end
   end
+
+  context '#all_same?' do
+    it 'returns true for an array of 3 Xs' do
+      expect(['X', 'X', 'X'].all_same?).to be true
+    end
+  end
 end
