@@ -97,6 +97,10 @@ module TicTacToe
         it 'returns winner when diagonal has objects of all same value' do
           expect(Board.new(grid: diagonal_win).game_over).to eq :winner
         end
+
+        it 'returns draw when all board space is taken with no 3 in a row' do
+          expect(Board.new(grid: draw).game_over).to eq :draw
+        end
       end
 
       context '#draw?' do
